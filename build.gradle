@@ -42,20 +42,15 @@ dependencies {
 nativeUtils {
   exportsConfigs {
     // Main library is just default empty. This will export everything
-    Vendor {
+    PESTControl {
     }
   }
-  privateExportsConfigs {
-    // Only export explicit symbols from driver library
-    VendorDriver {
-      exportsFile = project.file("src/main/driver/symbols.txt")
-    }
-  }
+  
 }
 
 model {
   components {
-    Vendor(NativeLibrarySpec) {
+    PESTControl(NativeLibrarySpec) {
       sources {
         cpp {
           source {
@@ -67,36 +62,13 @@ model {
           }
         }
       }
-      binaries.all {
-        lib library: 'VendorDriver', linkage: 'shared'
-      }
+      
       nativeUtils.useRequiredLibrary(it, 'wpilib_shared')
     }
 
-    VendorDriver(JniNativeLibrarySpec) {
-      enableCheckTask true
-      javaCompileTasks << compileJava
-      jniCrossCompileOptions << JniCrossCompileOptions(nativeUtils.wpi.platforms.roborio)
-      // Leave these for future proofing
-      jniCrossCompileOptions << JniCrossCompileOptions(nativeUtils.wpi.platforms.linuxarm32)
-      jniCrossCompileOptions << JniCrossCompileOptions(nativeUtils.wpi.platforms.linuxarm64)
-      sources {
-        cpp {
-          source {
-            srcDirs 'src/main/driver/cpp'
-            include '**/*.cpp'
-          }
-          exportedHeaders {
-            srcDirs 'src/main/driver/include'
-          }
-        }
-      }
-
-      nativeUtils.useRequiredLibrary(it, "driver_shared")
-    }
   }
   testSuites {
-    VendorTest {
+    PESTControlTest {
         sources.cpp {
             source {
                 srcDir 'src/test/native/cpp'
@@ -104,23 +76,12 @@ model {
             }
         }
 
-        binaries.all {
-          lib library: 'VendorDriver', linkage: 'shared'
-        }
+       
 
         nativeUtils.useRequiredLibrary(it, "wpilib_executable_shared", "googletest_static")
     }
 
-    VendorDriverTest {
-        sources.cpp {
-            source {
-                srcDir 'src/test/driver/cpp'
-                include '**/*.cpp'
-            }
-        }
-
-        nativeUtils.useRequiredLibrary(it, "wpilib_executable_shared", "googletest_static")
-    }
+  
   }
 }
 
