@@ -1,62 +1,27 @@
 {
-    "fileName": "ExampleVendorJson.json",
-    "name": "ExampleVendorDep",
+    "fileName": "PESTControl.json",
+    "name": "PESTControl",
     "version": "0.0.1",
     "frcYear": "2024",
-    "uuid": "Generate A Unique GUID https://guidgenerator.com/online-guid-generator.aspx and insert it here", This line is to purposely make this fail to parse
+    "uuid": "1f73609e-edc6-45e1-b116-ca6a8153f0e5",
     "mavenUrls": [
         "ThisNeedsToBeTheRootMavenUrl"
     ],
-    "jsonUrl": "InsertSomeUrlHere",
+    "jsonUrl": "https://realMoneyMike.github.io/pestcontrol/PESTControl.json",
     "javaDependencies": [
         {
-            "groupId": "com.vendor.frc",
-            "artifactId": "Vendor-java",
+            "groupId": "com.PESTControl.lib",
+            "artifactId": "BESTControl-java",
             "version": "0.0.1"
         }
     ],
-    "jniDependencies": [
-        {
-            "groupId": "com.vendor.frc",
-            "artifactId": "Vendor-driver",
-            "version": "0.0.1",
-            "skipInvalidPlatforms": true,
-            "isJar": false,
-            "validPlatforms": [
-                "windowsx86-64",
-                "windowsx86",
-                "linuxarm64",
-                "linuxx86-64",
-                "linuxathena",
-                "linuxarm32",
-                "osxuniversal"
-            ]
-        }
-    ],
+    "jniDependencies": [],
     "cppDependencies": [
         {
-            "groupId": "com.vendor.frc",
-            "artifactId": "Vendor-cpp",
+            "groupId": "com.PESTControl.frc",
+            "artifactId": "PESTControl-cpp",
             "version": "0.0.1",
-            "libName": "Vendor",
-            "headerClassifier": "headers",
-            "sharedLibrary": false,
-            "skipInvalidPlatforms": true,
-            "binaryPlatforms": [
-                "windowsx86-64",
-                "windowsx86",
-                "linuxarm64",
-                "linuxx86-64",
-                "linuxathena",
-                "linuxarm32",
-                "osxuniversal"
-            ]
-        },
-        {
-            "groupId": "com.vendor.frc",
-            "artifactId": "Vendor-driver",
-            "version": "0.0.1",
-            "libName": "VendorDriver",
+            "libName": "PESTControl",
             "headerClassifier": "headers",
             "sharedLibrary": false,
             "skipInvalidPlatforms": true,
