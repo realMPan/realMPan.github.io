@@ -10,7 +10,7 @@
     "jsonUrl": "https://realMPan.github.io/project/PESTControl.json",
     "javaDependencies": [
         {
-            "groupId": "com.PESTControl.lib",
+            "groupId": "com.PESTControl",
             "artifactId": "PESTControl-java",
             "version": "0.0.1"
         }
@@ -18,7 +18,7 @@
     "jniDependencies": [],
     "cppDependencies": [
         {
-            "groupId": "com.PESTControl.frc",
+            "groupId": "com.PESTControl",
             "artifactId": "PESTControl-cpp",
             "version": "0.0.1",
             "libName": "PESTControl",
