@@ -42,7 +42,7 @@ ext.addTaskToCopyAllOutputs = { task ->
     copyAllOutputs.from task.archiveFile
 }
 
-def artifactGroupId = 'com.pestControl'
+def artifactGroupId = 'com.PESTControl'
 def baseArtifactId = 'PESTControl'
 def zipBaseName = "_GROUP_com_PESTControl_ID_${baseArtifactId}-cpp_CLS"
 def javaBaseName = "_GROUP_com_PESTControl_ID_${baseArtifactId}-java_CLS"
