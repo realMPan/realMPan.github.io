@@ -11,6 +11,7 @@ plugins {
 repositories {
   mavenCentral()
 }
+
 if (project.hasProperty('releaseMode')) {
   wpilibRepositories.addAllReleaseRepositories(project)
 } else {
