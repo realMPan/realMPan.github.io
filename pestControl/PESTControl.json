@@ -7,7 +7,9 @@
     "mavenUrls": [
         "https://realMPan.github.io/pestControl/repos"
     ],
+
     "jsonUrl": "https://realMPan.github.io/pestControl/PESTControl.json",
+
     "javaDependencies": [
         {
             "groupId": "com.PESTControl",
