@@ -5,9 +5,9 @@
     "frcYear": "2024",
     "uuid": "1f73609e-edc6-45e1-b116-ca6a8153f0e5",
     "mavenUrls": [
-        "https://realMPan.github.io/project"
+        "https://realMPan.github.io/pestControl/repos"
     ],
-    "jsonUrl": "https://realMPan.github.io/project/PESTControl.json",
+    "jsonUrl": "https://realMPan.github.io/pestControl/PESTControl.json",
     "javaDependencies": [
         {
             "groupId": "com.PESTControl",
