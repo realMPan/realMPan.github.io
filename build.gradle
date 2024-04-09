@@ -7,7 +7,6 @@ plugins {
     id 'edu.wpi.first.GradleJni' version '1.1.0'
     id 'edu.wpi.first.GradleVsCode' version '2.1.0'
     id "edu.wpi.first.GradleRIO" version "2024.2.1"
-    id "com.diffplug.spotless" version "6.11.0"
 }
 
 repositories {
@@ -80,46 +79,6 @@ model {
             nativeUtils.useRequiredLibrary(it, "wpilib_executable_shared", "googletest_static")
         }
 
-    }
-}
-
-spotless {
-    java {
-        target fileTree('.') {
-            include '**/*.java'
-            exclude '**/build/**', '**/build-*/**'
-        }
-        toggleOffOn()
-        googleJavaFormat()
-        removeUnusedImports()
-        trimTrailingWhitespace()
-        endWithNewline()
-    }
-    cpp {
-        target fileTree('.') {
-            include '**/*.cpp', '**/*.h'
-            exclude '**/build/**', '**/build-*/**'
-        }
-        eclipseCdt()
-    }
-    groovyGradle {
-        target fileTree('.') {
-            include '**/*.gradle'
-            exclude '**/build/**', '**/build-*/**'
-        }
-        greclipse()
-        indentWithSpaces(4)
-        trimTrailingWhitespace()
-        endWithNewline()
-    }
-    format 'misc', {
-        target fileTree('.') {
-            include '**/*.md', '**/.gitignore'
-            exclude '**/build/**', '**/build-*/**'
-        }
-        trimTrailingWhitespace()
-        indentWithSpaces(4)
-        endWithNewline()
     }
 }
 
