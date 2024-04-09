@@ -6,13 +6,13 @@ plugins {
     id 'edu.wpi.first.NativeUtils' version '2024.6.1'
     id 'edu.wpi.first.GradleJni' version '1.1.0'
     id 'edu.wpi.first.GradleVsCode' version '2.1.0'
-    id 'maven-publish'
+    id "edu.wpi.first.GradleRIO" version "2024.2.1"
+    id "com.diffplug.spotless" version "6.11.0"
 }
 
 repositories {
     mavenCentral()
 }
-
 if (project.hasProperty('releaseMode')) {
     wpilibRepositories.addAllReleaseRepositories(project)
 } else {
@@ -24,6 +24,9 @@ apply from: 'config.gradle'
 
 // Apply Java configuration
 dependencies {
+    implementation wpi.java.deps.wpilib()
+    implementation wpi.java.vendor.java()
+
     implementation 'edu.wpi.first.cscore:cscore-java:2024.+'
     implementation 'edu.wpi.first.cameraserver:cameraserver-java:2024.+'
     implementation 'edu.wpi.first.ntcore:ntcore-java:2024.+'
@@ -46,7 +49,6 @@ nativeUtils {
         PESTControl {
         }
     }
-
 }
 
 model {
@@ -63,10 +65,8 @@ model {
                     }
                 }
             }
-
             nativeUtils.useRequiredLibrary(it, 'wpilib_shared')
         }
-
     }
     testSuites {
         PESTControlTest {
@@ -77,12 +77,49 @@ model {
                 }
             }
 
-
-
             nativeUtils.useRequiredLibrary(it, "wpilib_executable_shared", "googletest_static")
         }
 
+    }
+}
 
+spotless {
+    java {
+        target fileTree('.') {
+            include '**/*.java'
+            exclude '**/build/**', '**/build-*/**'
+        }
+        toggleOffOn()
+        googleJavaFormat()
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+    cpp {
+        target fileTree('.') {
+            include '**/*.cpp', '**/*.h'
+            exclude '**/build/**', '**/build-*/**'
+        }
+        eclipseCdt()
+    }
+    groovyGradle {
+        target fileTree('.') {
+            include '**/*.gradle'
+            exclude '**/build/**', '**/build-*/**'
+        }
+        greclipse()
+        indentWithSpaces(4)
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+    format 'misc', {
+        target fileTree('.') {
+            include '**/*.md', '**/.gitignore'
+            exclude '**/build/**', '**/build-*/**'
+        }
+        trimTrailingWhitespace()
+        indentWithSpaces(4)
+        endWithNewline()
     }
 }
 
