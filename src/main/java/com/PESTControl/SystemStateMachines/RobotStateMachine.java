@@ -37,16 +37,9 @@ public class RobotStateMachine extends SubsystemBase  {
 
     @Override
     public void periodic(){
+        System.out.println("ROBOT STATEMACHINE PERIODIC");
         run();
         StateBinder.periodic();
     }
-    @Override
-    public void simulationPeriodic(){
-        run();
-        StateBinder.periodic();
-    }
-
-    
-    
     
 }

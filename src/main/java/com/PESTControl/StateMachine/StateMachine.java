@@ -23,7 +23,7 @@ public class StateMachine {
     private ArrayList<State> pathToGoal;
     private boolean bestPathFound;
     ArrayList<ArrayList<State>> allPathsToGoal = new ArrayList<ArrayList<State>>();
-    private boolean display;
+    private boolean display = false;
 
 
     /**
@@ -111,6 +111,9 @@ public class StateMachine {
             System.out.println("VALID PATH FOUND");
         }
         
+    }
+    public void setDisplay(boolean display){
+        this.display = display;
     }
 
     private void prune(){
