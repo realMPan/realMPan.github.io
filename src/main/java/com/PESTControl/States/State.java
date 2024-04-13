@@ -3,7 +3,7 @@ package com.PESTControl.States;
 import java.util.ArrayList;
 import java.util.function.DoubleSupplier;
 
-import com.PESTControl.StateMachine.StateMachine;
+import com.PESTControl.StateMachine;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;

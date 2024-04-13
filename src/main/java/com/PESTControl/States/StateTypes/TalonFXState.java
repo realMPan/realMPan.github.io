@@ -2,7 +2,7 @@ package com.PESTControl.States.StateTypes;
 
 import java.lang.annotation.Target;
 
-import com.PESTControl.StateMachine.StateMachine;
+import com.PESTControl.StateMachine;
 import com.PESTControl.States.State;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.revrobotics.CANSparkMax;
