@@ -6,6 +6,7 @@ import com.PESTControl.PESTControlUtilities.StateBinder;
 import com.PESTControl.StateMachine.StateMachine;
 import com.PESTControl.States.State;
 
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
@@ -15,6 +16,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  */
 public class RobotStateMachine extends SubsystemBase  {
     public static ArrayList<StateMachine> registeredStateMachines = new ArrayList<StateMachine>();
+    private static RobotStateMachine schedulerInstance = new RobotStateMachine();
+
+    protected RobotStateMachine(){
+
+    }
 
 
     /**
@@ -40,6 +46,9 @@ public class RobotStateMachine extends SubsystemBase  {
         System.out.println("ROBOT STATEMACHINE PERIODIC");
         run();
         StateBinder.periodic();
+    }
+    public static void activate(){
+        CommandScheduler.getInstance().registerSubsystem(schedulerInstance);
     }
     
 }
