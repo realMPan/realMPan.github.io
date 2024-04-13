@@ -31,9 +31,9 @@ public class StateMachine {
     ArrayList<ArrayList<State>> allPathsToGoal = new ArrayList<ArrayList<State>>();
     private boolean display = false;
     
-    private GenericEntry currentStateEntry;
-    private GenericEntry goalStateEntry;
-    private GenericEntry defaultStateEntry;
+    private GenericEntry currentStateEntry = null;
+    private GenericEntry goalStateEntry = null;
+    private GenericEntry defaultStateEntry = null;
     private boolean hasInit = false;
     private int counter = 0;
     private ShuffleboardTab ShuffleboardTab;
@@ -44,7 +44,7 @@ public class StateMachine {
   
 
 
- 
+    
     /**
      * Constructs a custom PEST_Control StateMachine. This constructor will need you to set a defaultState later on
      * @param name
@@ -53,6 +53,7 @@ public class StateMachine {
      */
     public StateMachine(String name){
         this.name = name;
+        displayInit();
 
     }
     /**
@@ -70,6 +71,7 @@ public class StateMachine {
         boundStates.add(defaultState);
         defaultState.bindToMachine(this);
         goalState = defaultState;
+        displayInit();
 
     }
 
@@ -95,9 +97,15 @@ public class StateMachine {
             }
             state.bindToMachine(this);
         }
+        displayInit();
     }
 
     private void displayInit(){
+        machineTab = Shuffleboard.getTab(name + " StateMachine");
+        layout = machineTab.getLayout("Machine Diagnostics", BuiltInLayouts.kList);
+        currentStateEntry = layout.add("Current State", currentState.getName()).getEntry();
+        defaultStateEntry = layout.add("Default State", defaultState.getName()).getEntry();
+        goalStateEntry = layout.add("Goal State", goalState.getName()).getEntry();
     }
 
 
@@ -217,11 +225,7 @@ public class StateMachine {
         if(display){
             if(currentStateEntry == null)
                 System.out.println(currentState == null);
-                machineTab = Shuffleboard.getTab(name + " StateMachine");
-                layout = machineTab.getLayout("Machine Diagnostics", BuiltInLayouts.kList);
-                currentStateEntry = layout.add("Current State", currentState.getName()).getEntry();
-                defaultStateEntry = layout.add("Default State", defaultState.getName()).getEntry();
-                goalStateEntry = layout.add("Goal State", goalState.getName()).getEntry();
+                
                 System.out.println("Entries Fully setup");
 
             }else{
