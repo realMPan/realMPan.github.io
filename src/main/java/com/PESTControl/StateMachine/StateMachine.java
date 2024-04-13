@@ -194,13 +194,19 @@ public class StateMachine {
         //Display only occurs when the displaying of StateMachine Statistics is desired
         if(display){
             //Current State of the Machine
-            Shuffleboard.getTab(name+ " StateMachine").add("Current State", currentState.getName());
-            //Default State of the Machine
-            Shuffleboard.getTab(name+ " StateMachine").add("Default State", defaultState.getName());
-            //Goal State of the Machine
-            Shuffleboard.getTab(name+ " StateMachine").add("Goal State", goalState.getName());
-            //Path to the Goal State of the StateMachine
-            Shuffleboard.getTab(name+ " StateMachine").add("State Path to Goal State", currentState.getName());
+            if(Shuffleboard.getTab(name+ " StateMachine").add("Current State", currentState.getName()) == null){
+                Shuffleboard.getTab(name+ " StateMachine").add("Current State", currentState.getName());
+            }
+            if(Shuffleboard.getTab(name+ " StateMachine").add("Default State", defaultState.getName()) == null){
+                Shuffleboard.getTab(name+ " StateMachine").add("Default State", defaultState.getName());
+            }
+            if(Shuffleboard.getTab(name+ " StateMachine").add("Goal State", goalState.getName()) == null){
+                Shuffleboard.getTab(name+ " StateMachine").add("Goal State", goalState.getName());
+            }
+            if(Shuffleboard.getTab(name+ " StateMachine").add("State Path to Goal State", currentState.getName()) == null){
+                Shuffleboard.getTab(name+ " StateMachine").add("State Path to Goal State", currentState.getName());
+            }
+            Shuffleboard.update();
         }
         
 
