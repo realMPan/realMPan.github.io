@@ -33,7 +33,7 @@ public class StateMachine {
      * The name of the state machine, primarily used for throwing errors and passing data to applicable Dashboards
      * 
      */
-    StateMachine(String name){
+    public StateMachine(String name){
         this.name = name;
     }
     /**
@@ -43,7 +43,7 @@ public class StateMachine {
      * @param defaultState
      * The State that this Statemachine should be in upon robot startup. States must be bound to StateMachines in order to be usable.
      */
-    StateMachine(String name, State defaultState){
+    public StateMachine(String name, State defaultState){
         this.name = name;
         this.defaultState = defaultState;
         boundStates.add(defaultState);
@@ -59,10 +59,10 @@ public class StateMachine {
      * @param defaultState
      * The State that this Statemachine should be in upon robot startup.
      * @param statesToBind
-     * An array of States to bind to this StateMachine if they have already been constructed upon StateMachine creation.<p>
-     * <strong>The array should include your defaultState Object<strong>
+     * An array of States to bind to this StateMachine if they have already been constructed upon StateMachine creation. <p>
+     * <strong>The array should include your defaultState Object </strong>
      */
-    StateMachine(String name, State defaultState, ArrayList<State> statesToBind){
+    public StateMachine(String name, State defaultState, ArrayList<State> statesToBind){
         this.name = name;
         this.defaultState = defaultState;
         goalState = defaultState;
@@ -138,6 +138,11 @@ public class StateMachine {
         }
         
     }
+    /**
+     * Determines whether to display diagnostic info for this StateMachine
+     * @param display
+     * Whether to put StateMachine info to ShuffleBoard, false by default
+     */
     public void setDisplay(boolean display){
         this.display = display;
     }
