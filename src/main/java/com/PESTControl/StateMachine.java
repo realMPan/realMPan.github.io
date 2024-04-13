@@ -36,6 +36,9 @@ public class StateMachine {
     private GenericEntry defaultStateEntry;
     private boolean hasInit = false;
     private int counter = 0;
+    private ShuffleboardTab ShuffleboardTab;
+    private ShuffleboardLayout layout;
+    private edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab machineTab;
     
     
   
@@ -95,11 +98,6 @@ public class StateMachine {
     }
 
     private void displayInit(){
-        ShuffleboardTab machineTab = Shuffleboard.getTab(name + " StateMachine");
-        ShuffleboardLayout layout = machineTab.getLayout("Machine Diagnostics", BuiltInLayouts.kList);
-        currentStateEntry = layout.add("Current State", currentState.getName()).getEntry();
-        defaultStateEntry = layout.add("Default State", defaultState.getName()).getEntry();
-        goalStateEntry = layout.add("Goal State", goalState.getName()).getEntry();
     }
 
 
@@ -219,14 +217,15 @@ public class StateMachine {
         System.out.println(counter);
         counter += 1;
         if(display){
-            if(!hasInit){
-                displayInit();
+            if(currentStateEntry == null)
+                machineTab = Shuffleboard.getTab(name + " StateMachine");
+                layout = machineTab.getLayout("Machine Diagnostics", BuiltInLayouts.kList);
+                currentStateEntry = layout.add("Current State", currentState.getName()).getEntry();
+                defaultStateEntry = layout.add("Default State", defaultState.getName()).getEntry();
+                goalStateEntry = layout.add("Goal State", goalState.getName()).getEntry();
+
             }
             currentStateEntry.setString(currentState.getName());
             goalStateEntry.setString(goalState.getName());
-        }
     }
-    
-    
-
 }
