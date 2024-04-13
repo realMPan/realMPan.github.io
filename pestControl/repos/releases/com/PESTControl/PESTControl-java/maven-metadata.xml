@@ -3,11 +3,11 @@
   <groupId>com.PESTControl</groupId>
   <artifactId>PESTControl-java</artifactId>
   <versioning>
-    <latest>0.0.53.8</latest>
-    <release>0.0.53.8</release>
+    <latest>0.0.53.9</latest>
+    <release>0.0.53.9</release>
     <versions>
-      <version>0.0.53.8</version>
+      <version>0.0.53.9</version>
     </versions>
-    <lastUpdated>20240413164212</lastUpdated>
+    <lastUpdated>20240413165500</lastUpdated>
   </versioning>
 </metadata>

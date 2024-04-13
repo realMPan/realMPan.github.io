@@ -162,7 +162,7 @@ public class StateMachine {
      */
     public void moveToTarget(){
         //Checks if the Path to Goal is valid and we arent already moving to/at the goalState
-        if (!pathToGoal.contains(goalState) && !currentState.equals(goalState)){
+        if (pathToGoal == null || (!pathToGoal.contains(goalState) && !currentState.equals(goalState))){
             //Replans the path if not
             planPathToGoal();
         }else{
