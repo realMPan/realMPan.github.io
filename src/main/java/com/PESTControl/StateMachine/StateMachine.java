@@ -46,6 +46,8 @@ public class StateMachine {
     public StateMachine(String name, State defaultState){
         this.name = name;
         this.defaultState = defaultState;
+        goalState = defaultState;
+        currentState = defaultState;
         boundStates.add(defaultState);
         defaultState.bindToMachine(this);
         goalState = defaultState;
@@ -66,6 +68,7 @@ public class StateMachine {
         this.name = name;
         this.defaultState = defaultState;
         goalState = defaultState;
+        currentState = defaultState;
         for (State state : statesToBind) {
             if(!boundStates.contains(state)){
                 boundStates.add(state);
