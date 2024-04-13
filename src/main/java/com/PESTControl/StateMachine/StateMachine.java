@@ -5,9 +5,15 @@ import java.util.ArrayList;
 
 import com.PESTControl.States.State;
 
+import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardContainer;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
 
 /**
@@ -24,9 +30,17 @@ public class StateMachine {
     private boolean bestPathFound;
     ArrayList<ArrayList<State>> allPathsToGoal = new ArrayList<ArrayList<State>>();
     private boolean display = false;
+    
+    private GenericEntry currentStateEntry;
+    private GenericEntry goalStateEntry;
+    private GenericEntry defaultStateEntry;
+    private boolean hasInit = false;
+    
+    
+  
 
 
-
+ 
     /**
      * Constructs a custom PEST_Control StateMachine. This constructor will need you to set a defaultState later on
      * @param name
@@ -35,6 +49,7 @@ public class StateMachine {
      */
     public StateMachine(String name){
         this.name = name;
+
     }
     /**
      * Constructs a custom PEST_Control StateMachine
@@ -51,6 +66,7 @@ public class StateMachine {
         boundStates.add(defaultState);
         defaultState.bindToMachine(this);
         goalState = defaultState;
+
     }
 
 
@@ -75,6 +91,14 @@ public class StateMachine {
             }
             state.bindToMachine(this);
         }
+    }
+
+    private void displayInit(){
+        ShuffleboardTab machineTab = Shuffleboard.getTab(name + " StateMachine");
+        ShuffleboardLayout layout = machineTab.getLayout("Machine Diagnostics", BuiltInLayouts.kList);
+        currentStateEntry = layout.add("Current State", currentState.getName()).getEntry();
+        defaultStateEntry = layout.add("Default State", defaultState.getName()).getEntry();
+        goalStateEntry = layout.add("Goal State", goalState.getName()).getEntry();
     }
 
 
@@ -191,28 +215,13 @@ public class StateMachine {
      * The method called by the StateMachine to display pertinent statistics on Shuffleboard. Only runs if display reads true
      */
     public void display(){
-        //Display only occurs when the displaying of StateMachine Statistics is desired
         if(display){
-            //Current State of the Machine
-            if(Shuffleboard.getTab(name+ " StateMachine").add("Current State", currentState.getName()) == null){
-                Shuffleboard.getTab(name+ " StateMachine").add("Current State", currentState.getName());
+            if(!hasInit){
+                displayInit();
             }
-            if(Shuffleboard.getTab(name+ " StateMachine").add("Default State", defaultState.getName()) == null){
-                Shuffleboard.getTab(name+ " StateMachine").add("Default State", defaultState.getName());
-            }
-            if(Shuffleboard.getTab(name+ " StateMachine").add("Goal State", goalState.getName()) == null){
-                Shuffleboard.getTab(name+ " StateMachine").add("Goal State", goalState.getName());
-            }
-            if(Shuffleboard.getTab(name+ " StateMachine").add("State Path to Goal State", currentState.getName()) == null){
-                Shuffleboard.getTab(name+ " StateMachine").add("State Path to Goal State", currentState.getName());
-            }
-            Shuffleboard.update();
+            currentStateEntry.setString(currentState.getName());
+            goalStateEntry.setString(goalState.getName());
         }
-        
-
-
-
-
     }
     
     
