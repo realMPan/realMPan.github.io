@@ -1,7 +1,7 @@
 {
     "fileName": "PESTControl.json",
     "name": "PESTControl",
-    "version": "0.0.53.12.3",
+    "version": "0.0.53.12.4",
     "frcYear": "2024",
     "uuid": "1f73609e-edc6-45e1-b116-ca6a8153f0e5",
     "mavenUrls": [
@@ -14,7 +14,7 @@
         {
             "groupId": "com.PESTControl",
             "artifactId": "PESTControl-java",
-            "version": "0.0.53.12.3"
+            "version": "0.0.53.12.4"
         }
     ],
     "jniDependencies": [],

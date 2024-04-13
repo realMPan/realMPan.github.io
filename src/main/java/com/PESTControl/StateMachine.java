@@ -224,8 +224,11 @@ public class StateMachine {
                 defaultStateEntry = layout.add("Default State", defaultState.getName()).getEntry();
                 goalStateEntry = layout.add("Goal State", goalState.getName()).getEntry();
 
+            }else{
+                System.out.println("Bingus "+counter);
+                currentStateEntry.setString(currentState.getName());
+                goalStateEntry.setString(goalState.getName());
             }
-            currentStateEntry.setString(currentState.getName());
-            goalStateEntry.setString(goalState.getName());
+            
     }
 }
