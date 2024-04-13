@@ -216,13 +216,13 @@ public class StateMachine {
     public void display(){
         if(display){
             if(currentStateEntry == null)
-                System.out.println(counter);
-                counter += 1;
+                System.out.println(currentState == null);
                 machineTab = Shuffleboard.getTab(name + " StateMachine");
                 layout = machineTab.getLayout("Machine Diagnostics", BuiltInLayouts.kList);
                 currentStateEntry = layout.add("Current State", currentState.getName()).getEntry();
                 defaultStateEntry = layout.add("Default State", defaultState.getName()).getEntry();
                 goalStateEntry = layout.add("Goal State", goalState.getName()).getEntry();
+                System.out.println("Entries Fully setup");
 
             }else{
                 System.out.println("Bingus "+counter);
