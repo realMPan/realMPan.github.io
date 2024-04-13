@@ -39,38 +39,11 @@ public abstract class State {
     //Constructors
     
     
-  /**
-     * Initializes a State Object
-     * @param name
-     * The name of the state, useful for Dashboard debugging
-     * @param target
-     * The target of the state. As a majority of encoders report values doubles, this value must be a double
-     * @param boundMachine
-     * The StateMachine for this state to bind to. The binded StateMachine will be the only object in your project that can properly "activate" the state and trigger movements.
-     */
-    protected void commonInits(String name, double target, StateMachine boundMachine){
-        this.name = name;
-        this.target = target;
-        validTargets = new ArrayList<State>();
-        validOrigins = new ArrayList<State>();
-    }
+  
     
     
-    /**
-     * Initializes a State Object
-     * @param name
-     * The name of the state, useful for Dashboard debugging
-     * @param target
-     * The target of the state. As a majority of encoders report values doubles, this value must be a double
-     * @param boundMachine
-     * The StateMachine for this state to bind to. The binded StateMachine will be the only object in your project that can properly "active" the state and trigger movements.
-     * @param currentValueGetter
-     * A lambda function that tracks the current value of the moving mechanism in relation to its target. Used to determine how close to the target the StateMachine is.
-     */
-    protected State(String name, double target, StateMachine boundMachine, DoubleSupplier currentValueGetter){
-        commonInits(name, target, boundMachine);
-        this.currentValueGetter = currentValueGetter;
-    }
+    
+    
 
     /**
      * Initializes a State Object
@@ -85,8 +58,10 @@ public abstract class State {
      * @param controlFunction
      * A Runnable that will be called in the states move() method. Allows for high customization of how a State moves
      */
-    protected State(String name, double target, StateMachine boundMachine, DoubleSupplier currentValueGetter, Runnable controlFunction) {
-        this(name, target, boundMachine, currentValueGetter);
+    protected State(String name, double target, DoubleSupplier currentValueGetter, Runnable controlFunction) {
+        this.name = name;
+        this.target = target;
+        this.currentValueGetter = currentValueGetter;
         this.controlFunction = controlFunction;
     }
     
@@ -219,7 +194,9 @@ public abstract class State {
     public boolean equals(State obj) {
         return name==obj.getName();
     }
-    
+    public void bindToMachine(StateMachine boundMachine){
+        this.boundMachine = boundMachine;
+    }
     
 
     //Subclass Assistors. Help with making State Types

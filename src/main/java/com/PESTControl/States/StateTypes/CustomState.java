@@ -24,8 +24,8 @@ public class CustomState extends State {
      * @param controlFunction
      * A Runnable that will be called in the states move() method. Allows for high customization of how a State moves
      */
-    public CustomState(String name, double target, StateMachine boundMachine, DoubleSupplier currentValueGetter, Runnable controlFunction) {
-        super(name, target, boundMachine, currentValueGetter,controlFunction);
+    public CustomState(String name, double target, DoubleSupplier currentValueGetter, Runnable controlFunction) {
+        super(name, target, currentValueGetter,controlFunction);
     }
     
 }

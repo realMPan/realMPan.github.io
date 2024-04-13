@@ -18,7 +18,7 @@ public class StateMachine {
     private ArrayList<State> boundStates = new ArrayList<State>();
     private State defaultState;
     private State currentState;
-    private State targetState = defaultState;
+    private State targetState;
     private State goalState;
     private ArrayList<State> pathToGoal;
     private boolean bestPathFound;
@@ -26,6 +26,16 @@ public class StateMachine {
     private boolean display = false;
 
 
+
+    /**
+     * Constructs a custom PEST_Control StateMachine. This constructor will need you to set a defaultState later on
+     * @param name
+     * The name of the state machine, primarily used for throwing errors and passing data to applicable Dashboards
+     * 
+     */
+    StateMachine(String name){
+        this.name = name;
+    }
     /**
      * Constructs a custom PEST_Control StateMachine
      * @param name
@@ -37,6 +47,8 @@ public class StateMachine {
         this.name = name;
         this.defaultState = defaultState;
         boundStates.add(defaultState);
+        defaultState.bindToMachine(this);
+        goalState = defaultState;
     }
 
 
@@ -53,10 +65,12 @@ public class StateMachine {
     StateMachine(String name, State defaultState, State[] statesToBind){
         this.name = name;
         this.defaultState = defaultState;
+        goalState = defaultState;
         for (State state : statesToBind) {
             if(!boundStates.contains(state)){
                 boundStates.add(state);
             }
+            state.bindToMachine(this);
         }
     }
 
@@ -71,10 +85,21 @@ public class StateMachine {
             DriverStation.reportWarning("Attempted to set goalState to a State not bound to this StateMachine", true);
         }else{
             this.goalState = goalState;
-            planPathToGoal();
         }
         
 
+    }
+    /**
+     * Set the DefaultState of the StateMachine. Every call will reset the goalState, so try to call only once
+     * @param defaultState The State to set as DefaultState
+     */
+    public void setDefaultState(State defaultState){
+        this.defaultState = defaultState;
+        goalState = defaultState;
+        if(!boundStates.contains(defaultState)){
+            boundStates.add(defaultState);
+        }
+        defaultState.bindToMachine(this);
     }
 
 
@@ -85,6 +110,7 @@ public class StateMachine {
         shortestPath(currentState, goalState, existingPath);
         prune();
     }
+
     private void shortestPath(State checkingState, State targetState, ArrayList<State> existingPath){
         //makes a copy of the passed path to prevent egregious manipulation of the existing paths and proper copying in recusrive iterations 
         ArrayList<State> tempPath = new ArrayList<State>(existingPath);
