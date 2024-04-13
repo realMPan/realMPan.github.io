@@ -1,4 +1,4 @@
-package com.PESTControl.StateMachine;
+package com.PESTControl;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -35,6 +35,7 @@ public class StateMachine {
     private GenericEntry goalStateEntry;
     private GenericEntry defaultStateEntry;
     private boolean hasInit = false;
+    private int counter = 0;
     
     
   
@@ -215,6 +216,7 @@ public class StateMachine {
      * The method called by the StateMachine to display pertinent statistics on Shuffleboard. Only runs if display reads true
      */
     public void display(){
+        counter += 1;
         if(display){
             if(!hasInit){
                 displayInit();

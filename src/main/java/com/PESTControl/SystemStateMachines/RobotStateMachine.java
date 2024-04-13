@@ -2,8 +2,8 @@ package com.PESTControl.SystemStateMachines;
 
 import java.util.ArrayList;
 
+import com.PESTControl.StateMachine;
 import com.PESTControl.PESTControlUtilities.StateBinder;
-import com.PESTControl.StateMachine.StateMachine;
 import com.PESTControl.States.State;
 
 import edu.wpi.first.wpilibj2.command.CommandScheduler;

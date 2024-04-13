@@ -3,7 +3,7 @@ package com.PESTControl.States.StateTypes;
 import java.util.function.Consumer;
 import java.util.function.DoubleSupplier;
 
-import com.PESTControl.StateMachine.StateMachine;
+import com.PESTControl.StateMachine;
 import com.PESTControl.States.State;
 
 
