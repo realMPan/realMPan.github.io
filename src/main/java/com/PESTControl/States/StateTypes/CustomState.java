@@ -8,10 +8,9 @@ import com.PESTControl.States.State;
 
 
 /**An exposed extension of the abstract State class designed for implementation of Custom Movement methods. <p> 
- * Good for more advanced teams that want greater control over how their States attempt to reach their set goals */
+ * Good for more advanced teams that want greater control over how their States attempt to reach their set goals. This State offer full control over how its progress is tracked and how it moves to its target*/
 public class CustomState extends State {
-    Runnable controlFunction;
-
+    
     /**
      * Initializes a State Object
      * @param name
@@ -25,9 +24,8 @@ public class CustomState extends State {
      * @param controlFunction
      * A Runnable that will be called in the states move() method. Allows for high customization of how a State moves
      */
-    CustomState(String name, double target, StateMachine boundMachine, DoubleSupplier currentValueGetter, Runnable controlFunction) {
-        super(name, target, boundMachine, currentValueGetter);
-        this.controlFunction = controlFunction;
+    public CustomState(String name, double target, StateMachine boundMachine, DoubleSupplier currentValueGetter, Runnable controlFunction) {
+        super(name, target, boundMachine, currentValueGetter,controlFunction);
     }
     
 }
