@@ -216,7 +216,10 @@ public class StateMachine {
      * The method called by the StateMachine to display pertinent statistics on Shuffleboard. Only runs if display reads true
      */
     public void display(){
+<<<<<<< HEAD
         System.out.println(counter);
+=======
+>>>>>>> 64af50aefc7815dca1ce80e17af2a989bc4630bb
         counter += 1;
         if(display){
             if(!hasInit){
