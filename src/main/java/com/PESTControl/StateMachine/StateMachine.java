@@ -62,7 +62,7 @@ public class StateMachine {
      * An array of States to bind to this StateMachine if they have already been constructed upon StateMachine creation.<p>
      * <strong>The array should include your defaultState Object<strong>
      */
-    StateMachine(String name, State defaultState, State[] statesToBind){
+    StateMachine(String name, State defaultState, ArrayList<State> statesToBind){
         this.name = name;
         this.defaultState = defaultState;
         goalState = defaultState;
