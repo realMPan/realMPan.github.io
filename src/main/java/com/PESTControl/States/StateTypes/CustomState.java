@@ -17,8 +17,6 @@ public class CustomState extends State {
      * The name of the state, useful for Dashboard debugging
      * @param target
      * The target of the state. As a majority of encoders report values doubles, this value must be a double
-     * @param boundMachine
-     * The StateMachine for this state to bind to. The binded StateMachine will be the only object in your project that can properly "activate" the state and trigger movements.
      * @param currentValueGetter
      * A DoubleSupplier that tracks the current value of the subsystem relative to its target
      * @param controlFunction

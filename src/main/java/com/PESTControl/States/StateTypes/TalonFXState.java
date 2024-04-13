@@ -30,14 +30,12 @@ public class TalonFXState extends State {
      * The name of your state, primarily used for debugging
      * @param target
      * The value that your state will target when activated. Must be a double
-     * @param boundMachine
-     * The StateMachine that this state is bound to. The Binded StateMachine is the only thing that will automatically call move()
      * @param controller
-     * The CANSparkMax motor controller this State will manipulate for movement.
+     * The TalonFX motor controller this State will manipulate for movement.
      * 
      */
-    TalonFXState(String name, double target, StateMachine boundMachine, TalonFX controller) {
-        super(name, target, boundMachine, () -> {return controller.getPosition().getValueAsDouble();});
+    TalonFXState(String name, double target, TalonFX controller) {
+        super(name, target, () -> {return controller.getPosition().getValueAsDouble();});
         this.controller = controller;
         
     }
@@ -47,16 +45,14 @@ public class TalonFXState extends State {
      * The name of your state, primarily used for debugging
      * @param target
      * The value that your state will target when activated. Must be a double
-     * @param boundMachine
-     * The StateMachine that this state is bound to. The Binded StateMachine is the only thing that will automatically call move()
      * @param controller
-     * The CANSparkMax motor controller this State will manipulate for movement.
+     * The TalonFX motor controller this State will manipulate for movement.
      * @param positionController
      * A PIDController for getting the CANSparkMax to proper position
      * 
      */
-    TalonFXState(String name, double target, StateMachine boundMachine, TalonFX controller, PIDController positionController) {
-        super(name, target, boundMachine, () -> {return controller.getPosition().getValueAsDouble();});
+    TalonFXState(String name, double target, TalonFX controller, PIDController positionController) {
+        super(name, target, () -> {return controller.getPosition().getValueAsDouble();});
         controlFunction = () -> {
             controller.set(
                 positionController.calculate(controller.getPosition().getValueAsDouble(), target));
@@ -69,18 +65,16 @@ public class TalonFXState extends State {
      * The name of your state, primarily used for debugging
      * @param target
      * The value that your state will target when activated. Must be a double
-     * @param boundMachine
-     * The StateMachine that this state is bound to. The Binded StateMachine is the only thing that will automatically call move()
      * @param controller
-     * The CANSparkMax motor controller this State will manipulate for movement.
+     * The TalonFX motor controller this State will manipulate for movement.
      * @param motorFeedforward
      * A feedforward for reliable controlling the velocity of your motor
      * @param velocityController
      * A PIDController for error correction in the motors velocity
      * 
      */
-    TalonFXState(String name, double target, StateMachine boundMachine, TalonFX controller, SimpleMotorFeedforward motorFeedforward, PIDController velocityController) {
-        super(name, target, boundMachine, () -> {return controller.getPosition().getValueAsDouble();});
+    TalonFXState(String name, double target, TalonFX controller, SimpleMotorFeedforward motorFeedforward, PIDController velocityController) {
+        super(name, target, () -> {return controller.getPosition().getValueAsDouble();});
         controlFunction = () -> {
             controller.set(
                 motorFeedforward.calculate(target) + velocityController.calculate(controller.getVelocity().getValueAsDouble(), target));

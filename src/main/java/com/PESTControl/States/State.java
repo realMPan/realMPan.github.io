@@ -36,13 +36,21 @@ public abstract class State {
     private boolean display;
 
 
-    //Constructors
-    
-    
-  
-    
-    
-    
+    /**
+     * Initializes a State Object
+     * @param name
+     * The name of the state, useful for Dashboard debugging
+     * @param target
+     * The target of the state. As a majority of encoders report values doubles, this value must be a double
+     * @param currentValueGetter
+     * A DoubleSupplier that tracks the current value of the subsystem relative to its target
+
+     */
+    protected State(String name, double target, DoubleSupplier currentValueGetter) {
+        this.name = name;
+        this.target = target;
+        this.currentValueGetter = currentValueGetter;
+    }
     
 
     /**
@@ -51,8 +59,6 @@ public abstract class State {
      * The name of the state, useful for Dashboard debugging
      * @param target
      * The target of the state. As a majority of encoders report values doubles, this value must be a double
-     * @param boundMachine
-     * The StateMachine for this state to bind to. The binded StateMachine will be the only object in your project that can properly "activate" the state and trigger movements.
      * @param currentValueGetter
      * A DoubleSupplier that tracks the current value of the subsystem relative to its target
      * @param controlFunction
@@ -65,10 +71,6 @@ public abstract class State {
         this.controlFunction = controlFunction;
     }
     
-
-
-    
-
 
     //Flow Control
     /**

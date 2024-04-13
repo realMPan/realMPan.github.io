@@ -27,15 +27,15 @@ public class SparkMaxState extends State {
      * The name of your state, primarily used for debugging
      * @param target
      * The value that your state will target when activated. Must be a double
-     * @param boundMachine
-     * The StateMachine that this state is bound to. The Binded StateMachine is the only thing that will automatically call move()
      * @param controller
      * The CANSparkMax motor controller this State will manipulate for movement.
      * 
      */
-    SparkMaxState(String name, double target, StateMachine boundMachine, CANSparkMax controller) {
-        super(name, target, boundMachine, () -> {return controller.getAbsoluteEncoder().getPosition();});
+    SparkMaxState(String name, double target, CANSparkMax controller) {
+        super(name, target, () -> {return controller.getAbsoluteEncoder().getPosition();});
         this.controller = controller;
+        controlFunction = () -> controller.set(target);
+        overrideControlFunction(controlFunction);
     }
     /**
      * Creates a SparkMaxState for positional targeting
@@ -43,8 +43,6 @@ public class SparkMaxState extends State {
      * The name of your state, primarily used for debugging
      * @param target
      * The value that your state will target when activated. Must be a double
-     * @param boundMachine
-     * The StateMachine that this state is bound to. The Binded StateMachine is the only thing that will automatically call move()
      * @param controller
      * The CANSparkMax motor controller this State will manipulate for movement. Its AbsoluteEncoder will be used for position tracking
      * @param positionController
@@ -52,7 +50,7 @@ public class SparkMaxState extends State {
      * 
      */
     SparkMaxState(String name, double target, StateMachine boundMachine, CANSparkMax controller, PIDController positionController) {
-        super(name, target, boundMachine, () -> {return controller.getAbsoluteEncoder().getPosition();});
+        super(name, target, () -> {return controller.getAbsoluteEncoder().getPosition();});
         controlFunction = () -> {
             controller.set(
                 positionController.calculate(controller.getAbsoluteEncoder().getPosition(), 
@@ -66,8 +64,6 @@ public class SparkMaxState extends State {
      * The name of your state, primarily used for debugging
      * @param target
      * The value that your state will target when activated. Must be a double
-     * @param boundMachine
-     * The StateMachine that this state is bound to. The Binded StateMachine is the only thing that will automatically call move()
      * @param controller
      * The CANSparkMax motor controller this State will manipulate for movement. Its AbsoluteEncoder will be used for velocity tracking
      * @param motorFeedforward
@@ -76,8 +72,8 @@ public class SparkMaxState extends State {
      * A PIDController for error correction in the motors velocity
      * 
      */
-    SparkMaxState(String name, double target, StateMachine boundMachine, CANSparkMax controller, SimpleMotorFeedforward motorFeedforward, PIDController velocityController) {
-        super(name, target, boundMachine, () -> {return controller.getAbsoluteEncoder().getVelocity();});
+    SparkMaxState(String name, double target, CANSparkMax controller, SimpleMotorFeedforward motorFeedforward, PIDController velocityController) {
+        super(name, target, () -> {return controller.getAbsoluteEncoder().getVelocity();});
         controlFunction = () -> {
             controller.set(
                 motorFeedforward.calculate(controller.getAbsoluteEncoder().getVelocity() + velocityController.calculate(controller.getAbsoluteEncoder().getVelocity(), 
