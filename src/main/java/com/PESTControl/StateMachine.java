@@ -214,10 +214,10 @@ public class StateMachine {
      * The method called by the StateMachine to display pertinent statistics on Shuffleboard. Only runs if display reads true
      */
     public void display(){
-        System.out.println(counter);
-        counter += 1;
         if(display){
             if(currentStateEntry == null)
+                System.out.println(counter);
+                counter += 1;
                 machineTab = Shuffleboard.getTab(name + " StateMachine");
                 layout = machineTab.getLayout("Machine Diagnostics", BuiltInLayouts.kList);
                 currentStateEntry = layout.add("Current State", currentState.getName()).getEntry();
