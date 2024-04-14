@@ -67,6 +67,7 @@ public class StateBinder {
 
     /**StateBinder's periodic method. Only public for usage in RobotStateMachine. <strong> Do not use in robot code. </strong> */
     public static void periodic(){
+        System.out.println("STATEBINDER PERIODIC");
         loop.poll();
     }
 }
