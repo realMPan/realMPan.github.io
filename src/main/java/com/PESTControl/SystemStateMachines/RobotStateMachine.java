@@ -46,6 +46,10 @@ public class RobotStateMachine extends SubsystemBase  {
         run();
         StateBinder.periodic();
     }
+
+    /**
+     * Activate the RobotStateMachine. Call in RobotInit, stateMachines will not work if this method is not called
+     */
     public static void activate(){
         CommandScheduler.getInstance().registerSubsystem(schedulerInstance);
     }
