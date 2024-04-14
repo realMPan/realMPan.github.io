@@ -22,7 +22,7 @@ public class StateBinder {
      */
     public static void bindStateTrigger(Trigger trigger, State state){
         BooleanEvent tempEvent = new BooleanEvent(loop, trigger);
-        tempEvent.ifHigh(() -> {state.boundTo().setGoalState(state);});
+        tempEvent.ifHigh(() -> {state.activate();});
         eventCache.put(tempEvent, state);
         System.out.println("Trigger Bound");
 
