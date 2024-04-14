@@ -24,6 +24,7 @@ public class StateBinder {
         BooleanEvent tempEvent = new BooleanEvent(loop, trigger);
         tempEvent.ifHigh(() -> {state.boundTo().setGoalState(state);});
         eventCache.put(tempEvent, state);
+        System.out.println("Trigger Bound");
 
     }
     /**
