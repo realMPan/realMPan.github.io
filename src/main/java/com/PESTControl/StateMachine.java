@@ -198,7 +198,7 @@ public class StateMachine {
 
     /**
      * The StateMachines periodic method which will attempt to reach the goal state when it is called. This method is always called by {@link com.PESTControl.SystemStateMachines.RobotStateMachine RobotStateMachine}, so ensure goalState changes only happen when nessecary<p>
-     * This method does nothing if the StateMachine is already at its goalState
+     * This method does nothing if the StateMachine is already at its goalState. It is public only for RobotStateMachine usage, do not use.
      */
     public void moveToTarget(){
         //Checks if the Path to Goal is valid and we arent already moving to/at the goalState
@@ -225,7 +225,7 @@ public class StateMachine {
     }
                 
     /**
-     * The method called by the StateMachine to display pertinent statistics on Shuffleboard. Only runs if display reads true
+     * The method called by the StateMachine to update pertinent information about itself. Public only for usage in RobotStateMachine, do not use.
      */
     public void display(){
         if(debugReady){
@@ -233,5 +233,13 @@ public class StateMachine {
             goalStateEntry.setString(goalState.getName());
         }
             
+    }
+
+    /**
+     * Get the path to the current goalState
+     * @return The Path to the goalState as an arrayList
+     */
+    public ArrayList<State> getCurrentPath(){
+        return pathToGoal;
     }
 }
