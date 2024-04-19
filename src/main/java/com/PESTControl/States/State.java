@@ -205,6 +205,9 @@ public abstract class State {
     protected void overrideControlFunction(Runnable controlFunction){
         this.controlFunction = controlFunction;
     }
+    protected void overrideGetterFunction(DoubleSupplier currentValueGetter){
+        this.currentValueGetter = currentValueGetter;
+    }
     
 
 
