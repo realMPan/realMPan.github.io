@@ -201,8 +201,8 @@ public class StateMachine {
      * This method does nothing if the StateMachine is already at its goalState. It is public only for RobotStateMachine usage, do not use.
      */
     public void moveToTarget(){
-        //Checks if the Path to Goal is valid and we arent already moving to/at the goalState
-        if (pathToGoal == null || (!(pathToGoal.indexOf(goalState) == pathToGoal.size()-1) && !currentState.equals(goalState))){
+        //Checks if the Path to Goal exists and end with our goalState
+        if (pathToGoal == null || !(pathToGoal.indexOf(goalState) == pathToGoal.size()-1)){
             //Replans the path if not
             System.out.println("REPLAN");
             planPathToGoal();
