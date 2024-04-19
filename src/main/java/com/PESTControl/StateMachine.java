@@ -152,7 +152,7 @@ public class StateMachine {
     }
 
     private void shortestPath(State checkingState, State targetState, ArrayList<State> existingPath){
-        //makes a copy of the passed path to prevent egregious manipulation of the existing paths and proper copying in recusrive iterations 
+        //makes a copy of the passed path to prevent egregious manipulation of the existing paths and proper copying in recursive iterations 
         ArrayList<State> tempPath = new ArrayList<State>(existingPath);
         tempPath.add(checkingState);
         for (State state : checkingState.targetStates()) {
@@ -204,18 +204,21 @@ public class StateMachine {
         //Checks if the Path to Goal is valid and we arent already moving to/at the goalState
         if (pathToGoal == null || (!pathToGoal.contains(goalState) && !currentState.equals(goalState))){
             //Replans the path if not
+            System.out.println("REPLAN");
             planPathToGoal();
         }else{
             //Checks if we are at/moving directly to the goalState
             if(currentState.equals(goalState)){
                 //runs the state's periodic method to keep it in place
                 currentState.periodic();
+                System.out.println("STATE PERIODIC");
                 //Otherwise, it runs the path
             }else{
                 //Checks if we are already at the current state
                 if(!currentState.at()){
                     //If not, lets us reach the current state before moving to the goalState
                     currentState.periodic();
+                    System.out.println("MOVING TO STATE");
                 }else{
                     //If we are at the current state, it changes our targetState to the next step in the path
                     currentState = pathToGoal.get(pathToGoal.indexOf(currentState)+1);
