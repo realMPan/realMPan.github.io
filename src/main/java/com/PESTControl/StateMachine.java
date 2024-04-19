@@ -240,6 +240,9 @@ public class StateMachine {
      * @return The Path to the goalState as an arrayList
      */
     public ArrayList<State> getCurrentPath(){
+        if(pathToGoal == null){
+            planPathToGoal();
+        }
         return pathToGoal;
     }
 }
